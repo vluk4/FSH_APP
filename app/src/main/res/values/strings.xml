@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Fs Health</string>
     <string name="action_settings">Settings</string>
+    <string name="d">D</string>
+    <string name="nome_do_rem_dio">Nome do Remédio</string>
+    <string name="s">S</string>
+    <string name="q">Q</string>
+    <string name="t">T</string>
+    <string name="repetir">Repetir:</string>
 </resources>
