@@ -60,4 +60,10 @@ public class RemedioDAO extends SQLiteOpenHelper {
 
         return remedios;
     }
+
+    public void deleta(Remedio remedio) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {remedio.getId().toString()};
+        db.delete("Remedios", "id = ?", params);
+    }
 }
