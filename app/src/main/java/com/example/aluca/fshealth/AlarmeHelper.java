@@ -5,18 +5,18 @@ import android.widget.TimePicker;
 
 import com.example.aluca.fshealth.modelo.Remedio;
 
-class AlarmeHelper {
+public class AlarmeHelper {
 
     private final EditText campoNome;
     private final TimePicker campoHorario;
 
-    AlarmeHelper(AlarmeActivity activity) {
+    public AlarmeHelper(AlarmeActivity activity) {
 
         campoNome = activity.findViewById(R.id.remedio_nome);
         campoHorario = activity.findViewById(R.id.remedio_horario);
     }
 
-    Remedio pegaRemedio() {
+    public Remedio pegaRemedio() {
         Remedio remedio = new Remedio();
         remedio.setNome(campoNome.getText().toString());
         remedio.setHora(campoHorario.getHour());
