@@ -5,15 +5,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.example.aluca.fshealth.DAO.RemedioDAO;
+import com.example.aluca.fshealth.modelo.Remedio;
 
 public class AlarmeActivity extends AppCompatActivity {
+
+    private AlarmeHelper helper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_alarm);
+
+        helper = new AlarmeHelper(this);
     }
 
     @Override
@@ -26,7 +31,11 @@ public class AlarmeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-                Toast.makeText(AlarmeActivity.this, "Alarme Salvo!", Toast.LENGTH_SHORT).show();
+                Remedio remedio = helper.pegaRemedio();
+                RemedioDAO dao = new RemedioDAO(this);
+                dao.insere(remedio);
+                dao.close();
+
                 finish();
                 break;
         }

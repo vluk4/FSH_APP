@@ -3,9 +3,16 @@ package com.example.aluca.fshealth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.aluca.fshealth.DAO.RemedioDAO;
+import com.example.aluca.fshealth.modelo.Remedio;
+
+import java.util.List;
 
 public class ListaMedicamentosActivity extends AppCompatActivity {
 
@@ -16,8 +23,6 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_medicamentos);
 
-        listaMedicamentos = findViewById(R.id.lista_medicamentos);
-
         Button novoMedicamento = findViewById(R.id.novo_medicamento);
         novoMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,5 +31,28 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                 startActivity(intentVaiProAlarme);
             }
         });
+
+        registerForContextMenu(listaMedicamentos);
+    }
+
+    private void carregaLista() {
+        RemedioDAO dao = new RemedioDAO(this);
+        List<Remedio> remedios = dao.buscaRemedios();
+        dao.close();
+
+        listaMedicamentos = findViewById(R.id.lista_medicamentos);
+        ArrayAdapter<Remedio> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, remedios);
+        listaMedicamentos.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.add("Deletar");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregaLista();
     }
 }

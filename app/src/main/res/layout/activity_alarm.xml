@@ -17,7 +17,7 @@
             android:text="@string/repetir"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+            app:layout_constraintTop_toBottomOf="@+id/remedio_horario" />
 
         <CheckBox
             android:id="@+id/checkBox7"
@@ -99,15 +99,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/d"
-            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintBottom_toTopOf="@+id/remedio_nome"
             app:layout_constraintEnd_toStartOf="@+id/checkBox7"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timePicker"
+            app:layout_constraintTop_toBottomOf="@+id/remedio_horario"
             app:layout_constraintVertical_bias="0.821" />
 
         <TimePicker
-            android:id="@+id/timePicker"
+            android:id="@+id/remedio_horario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:amPmBackgroundColor="#dc0000"
@@ -123,7 +123,7 @@
         </TimePicker>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/remedio_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -138,7 +138,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.32"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+            app:layout_constraintTop_toBottomOf="@+id/remedio_horario" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
