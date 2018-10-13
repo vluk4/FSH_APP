@@ -1,5 +1,6 @@
 package com.example.aluca.fshealth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,11 @@ public class AlarmeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm);
 
         helper = new AlarmeHelper(this);
+        Intent intent = getIntent();
+        Remedio remedio = (Remedio) intent.getSerializableExtra("remedio");
+        if (remedio != null) {
+            helper.preencheAlarme(remedio);
+        }
     }
 
     @Override
@@ -33,9 +39,12 @@ public class AlarmeActivity extends AppCompatActivity {
             case R.id.menu_formulario_ok:
                 Remedio remedio = helper.pegaRemedio();
                 RemedioDAO dao = new RemedioDAO(this);
-                dao.insere(remedio);
-                dao.close();
-
+                if (remedio.getId() != null) {
+                    dao.altera(remedio);
+                } else {
+                    dao.insere(remedio);
+                    dao.close();
+                }
                 finish();
                 break;
         }

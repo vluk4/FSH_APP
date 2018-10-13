@@ -27,6 +27,17 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
 
         listaMedicamentos = findViewById(R.id.lista_medicamentos);
 
+        listaMedicamentos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+
+                Remedio remedio = (Remedio) listaMedicamentos.getItemAtPosition(position);
+                Intent intentVaiProAlarme = new Intent(ListaMedicamentosActivity.this, AlarmeActivity.class);
+                intentVaiProAlarme.putExtra("remedio", remedio);
+                startActivity(intentVaiProAlarme);
+            }
+        });
+
         Button novoMedicamento = findViewById(R.id.novo_medicamento);
         novoMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override

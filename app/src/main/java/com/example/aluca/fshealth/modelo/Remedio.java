@@ -2,7 +2,9 @@ package com.example.aluca.fshealth.modelo;
 
 import android.support.annotation.NonNull;
 
-public class Remedio {
+import java.io.Serializable;
+
+public class Remedio implements Serializable {
 
     private Long id;
     private String nome;
