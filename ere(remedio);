@@ -1,0 +1,71 @@
+[33mcommit 0676fa21a891f60fbf4f653f6e2885936a072b31[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Sat Oct 13 12:35:10 2018 -0300
+
+    Adicionando opção de alterar o aluno.
+
+[33mcommit a9bd4f66ba5d12858f543c4be30c921565d97d4e[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Fri Oct 12 16:13:36 2018 -0300
+
+    Adicionando opção de deletar.
+
+[33mcommit 868d4ce3a12bf49ef9464509b8b87232d70914c4[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Fri Oct 12 15:02:36 2018 -0300
+
+    Adicionando Banco de Dados
+
+[33mcommit f48877beba99b64074d2489e92da4804c186d720[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Fri Oct 12 14:53:33 2018 -0300
+
+    Adicionando Banco de Dados
+
+[33mcommit 2fab79fcafcab169b477b8e90920a96c283f2ed6[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Wed Oct 10 22:59:31 2018 -0300
+
+    Modificando layout.
+
+[33mcommit eb85d0aeb246349b72f3dd774cf51c40e3a07955[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Tue Oct 9 23:28:13 2018 -0300
+
+    Modificando layout.
+
+[33mcommit b7ec1053f037d053bb8fac95f86155ae92c5802a[m
+Author: Victor Luca <vluca002@gmail.com>
+Date:   Tue Oct 2 07:28:17 2018 -0300
+
+    Adicionando uma nova tela.
+
+[33mcommit a10f1ae96ed793d2ec784b9e4dd2a9e76ab6596a[m
+Author: Lucas Martins <a.lucas460@gmail.com>
+Date:   Sun Sep 30 22:35:06 2018 -0300
+
+    Create Project
+
+[33mcommit 2d9caa6e2587b1925e418ccfba7c2ab5ef0f0b8c[m
+Author: Lucas Martins <a.lucas460@gmail.com>
+Date:   Sun Sep 30 21:31:20 2018 -0300
+
+    Create Project
+
+[33mcommit 99c2684de15cab98f7a2b6bd7e7a6ed3f524c42d[m
+Author: Lucas Martins <a.lucas460@gmail.com>
+Date:   Sun Sep 30 19:15:02 2018 -0300
+
+    Create Project
+
+[33mcommit da66f9841df51f4831fd7d3637f06c212a01ccd2[m
+Author: Lucas Martins <a.lucas460@gmail.com>
+Date:   Sun Sep 30 19:09:53 2018 -0300
+
+    Create Project
+
+[33mcommit addaa373a21cd6f952bdc5cc4815d13783cbbe1c[m
+Author: Victor Luca Chagas <33549759+vluk4@users.noreply.github.com>
+Date:   Tue Sep 25 14:08:38 2018 -0300
+
+    Initial commit
