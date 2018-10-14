@@ -12,13 +12,12 @@ public class AlarmeHelper {
     private Remedio remedio;
 
     public AlarmeHelper(AlarmeActivity activity) {
-        this.remedio = new Remedio();
         campoNome = activity.findViewById(R.id.remedio_nome);
         campoHorario = activity.findViewById(R.id.remedio_horario);
+        remedio = new Remedio();
     }
 
     public Remedio pegaRemedio() {
-        remedio = new Remedio();
         remedio.setNome(campoNome.getText().toString());
         remedio.setHora(campoHorario.getHour());
         remedio.setMinuto(campoHorario.getMinute());
@@ -27,9 +26,9 @@ public class AlarmeHelper {
     }
 
     public void preencheAlarme(Remedio remedio) {
-        this.remedio = remedio;
         campoNome.setText(remedio.getNome());
         campoHorario.setHour(remedio.getHora());
         campoHorario.setMinute(remedio.getMinuto());
+        this.remedio = remedio;
     }
 }

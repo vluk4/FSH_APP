@@ -50,15 +50,6 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         registerForContextMenu(listaMedicamentos);
     }
 
-    private void carregaLista() {
-        RemedioDAO dao = new RemedioDAO(this);
-        List<Remedio> remedios = dao.buscaRemedios();
-        dao.close();
-
-        ArrayAdapter<Remedio> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, remedios);
-        listaMedicamentos.setAdapter(adapter);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -85,8 +76,13 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        return super.onContextItemSelected(item);
+    private void carregaLista() {
+        RemedioDAO dao = new RemedioDAO(this);
+        List<Remedio> remedios = dao.buscaRemedios();
+        dao.close();
+
+        ArrayAdapter<Remedio> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, remedios);
+        listaMedicamentos.setAdapter(adapter);
     }
+
 }

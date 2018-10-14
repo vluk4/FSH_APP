@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_formulario_ok"
+        android:id="@+id/menu_alarme_ok"
         android:icon="@drawable/ic_confirmar"
         android:title="@string/ok"
         app:showAsAction="always" />

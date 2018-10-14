@@ -36,15 +36,16 @@ public class AlarmeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_formulario_ok:
+            case R.id.menu_alarme_ok:
                 Remedio remedio = helper.pegaRemedio();
                 RemedioDAO dao = new RemedioDAO(this);
                 if (remedio.getId() != null) {
                     dao.altera(remedio);
                 } else {
                     dao.insere(remedio);
-                    dao.close();
                 }
+                dao.close();
+
                 finish();
                 break;
         }

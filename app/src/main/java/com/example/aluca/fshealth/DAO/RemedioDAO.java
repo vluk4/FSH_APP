@@ -19,13 +19,13 @@ public class RemedioDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Remedios (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, horas INTEGER NOT NULL, minutos INTEGER NOT NULL);";
+        String sql = "CREATE TABLE Remedios (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, horas INTEGER NOT NULL, minutos INTEGER NOT NULL)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String sql = "DROP TABLE IF EXISTS Remedios;";
+        String sql = "DROP TABLE IF EXISTS Remedios";
         db.execSQL(sql);
         onCreate(db);
     }
@@ -78,7 +78,7 @@ public class RemedioDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues dados = pegaDadosRemedio(remedio);
-        String[] prams = {remedio.getId().toString()};
-        db.update("Remedios", dados, "id = ?", prams);
+        String[] params = {remedio.getId().toString()};
+        db.update("Remedios", dados, "id = ?", params);
     }
 }
