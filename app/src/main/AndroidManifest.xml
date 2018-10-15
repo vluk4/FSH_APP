@@ -21,6 +21,10 @@
         <activity
             android:name=".AlarmeActivity"
             android:label="Alarme"></activity>
+
+        <receiver android:name=".AlarmControl"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
