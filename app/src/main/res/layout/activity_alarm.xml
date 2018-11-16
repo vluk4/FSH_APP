@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,102 +10,31 @@
         android:layout_height="wrap_content">
 
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/repetir"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remedio_horario" />
-
-        <CheckBox
-            android:id="@+id/checkBox7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/s"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBox15"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox15"
-            app:layout_constraintTop_toTopOf="@+id/checkBox15"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <CheckBox
-            android:id="@+id/checkBox8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/t"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBox7"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox7"
-            app:layout_constraintTop_toTopOf="@+id/checkBox7"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <CheckBox
-            android:id="@+id/checkBox9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/q"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBox8"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox10"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox8"
-            app:layout_constraintTop_toTopOf="@+id/checkBox8"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <CheckBox
-            android:id="@+id/checkBox10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/q"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBox9"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox11"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox9"
-            app:layout_constraintTop_toTopOf="@+id/checkBox9"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <CheckBox
-            android:id="@+id/checkBox11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/s"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBox10"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox12"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox10"
-            app:layout_constraintTop_toTopOf="@+id/checkBox10"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <CheckBox
-            android:id="@+id/checkBox12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/s"
-            app:layout_constraintBottom_toBottomOf="@+id/checkBox11"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/checkBox11"
-            app:layout_constraintTop_toTopOf="@+id/checkBox11"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <CheckBox
-            android:id="@+id/checkBox15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/interval"
+            android:layout_width="170dp"
+            android:layout_height="43dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/d"
-            app:layout_constraintBottom_toTopOf="@+id/remedio_nome"
-            app:layout_constraintEnd_toStartOf="@+id/checkBox7"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:hint="Intervalo"
+            android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remedio_horario"
-            app:layout_constraintVertical_bias="0.821" />
+            app:layout_constraintTop_toBottomOf="@+id/remedio_nome" />
+
+        <EditText
+            android:id="@+id/Position"
+            android:layout_width="170dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Posição"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/interval"
+            app:layout_constraintTop_toBottomOf="@+id/remedio_nome" />
 
         <TimePicker
             android:id="@+id/remedio_horario"
@@ -114,7 +44,7 @@
             android:backgroundTint="#dc0000"
             android:headerBackground="#dc0000"
             android:numbersSelectorColor="#dc0000"
-            android:timePickerMode="clock"
+            android:timePickerMode="spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.55"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,20 +55,33 @@
         <EditText
             android:id="@+id/remedio_nome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:ems="10"
             android:hint="@string/nome_do_rem_dio"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.32"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/remedio_horario" />
+
+        <EditText
+            android:id="@+id/Amount"
+            android:layout_width="170dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Quantidade"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/interval" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

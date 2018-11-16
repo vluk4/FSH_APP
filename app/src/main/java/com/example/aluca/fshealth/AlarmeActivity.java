@@ -3,6 +3,7 @@ package com.example.aluca.fshealth;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -38,22 +39,22 @@ public class AlarmeActivity extends AppCompatActivity {
     }
 
 
-    public void setAlarm(long time){
+    public void setAlarm(Calendar calendar){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this,AlarmControl.class);
+        Intent intent = new Intent(AlarmeActivity.this,AlarmControl.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
     }
-
+    /*
     public void cancelAlarm(){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this,AlarmControl.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,0);
 
         alarmManager.cancel(pendingIntent);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,7 +77,7 @@ public class AlarmeActivity extends AppCompatActivity {
                 else{
                     calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
                 }
-                setAlarm(calendar.getTimeInMillis());
+                setAlarm(calendar);
 
 
                 Remedio remedio = helper.pegaRemedio();
@@ -93,4 +94,6 @@ public class AlarmeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
