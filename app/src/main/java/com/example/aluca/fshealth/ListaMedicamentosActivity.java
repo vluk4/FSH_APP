@@ -1,5 +1,6 @@
 package com.example.aluca.fshealth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.aluca.fshealth.DAO.RemedioDAO;
 import com.example.aluca.fshealth.modelo.Remedio;
@@ -20,11 +22,25 @@ import java.util.List;
 public class ListaMedicamentosActivity extends AppCompatActivity {
 
     private ListView listaMedicamentos;
+    BluetoothAdapter mybluetooth;
+    int Bluetoothstatus = 1;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.sync_button:
+                enableDisableBluetooth(mybluetooth);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_medicamentos);
+
+        mybluetooth = BluetoothAdapter.getDefaultAdapter();
 
         listaMedicamentos = findViewById(R.id.lista_medicamentos);
 
@@ -49,6 +65,17 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(listaMedicamentos);
+    }
+
+    public void enableDisableBluetooth(BluetoothAdapter mybluetooth){
+
+        if(mybluetooth==null){
+            Toast.makeText(getApplicationContext(),"O dispositivo não possui Bluetooth",Toast.LENGTH_LONG).show();
+        }
+        else if(!mybluetooth.isEnabled()){
+            Intent enableBTintent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBTintent,Bluetoothstatus);
+        }
     }
 
 
