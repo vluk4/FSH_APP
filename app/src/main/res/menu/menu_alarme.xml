@@ -10,5 +10,5 @@
         android:id="@+id/menu_alarme_ok"
         android:icon="@drawable/ic_confirmar"
         android:title="@string/ok"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

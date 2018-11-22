@@ -14,12 +14,13 @@ import java.util.List;
 
 public class RemedioDAO extends SQLiteOpenHelper {
     public RemedioDAO(Context context) {
-        super(context, "Remedios", null, 1);
+        super(context, "Remedios", null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Remedios (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, horas INTEGER NOT NULL, minutos INTEGER NOT NULL)";
+        String sql = "CREATE TABLE Remedios (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, horas INTEGER NOT NULL, minutos INTEGER NOT NULL, " +
+                "intervalo INTEGER NOT NULL, posicao INTEGER NOT NULL, quantidade INTEGER NOT NULL)";
         db.execSQL(sql);
     }
 
@@ -44,6 +45,9 @@ public class RemedioDAO extends SQLiteOpenHelper {
 
         dados.put("nome", remedio.getNome());
         dados.put("horas", remedio.getHora());
+        dados.put("intervalo", remedio.getIntervalo());
+        dados.put("posicao", remedio.getPosicao());
+        dados.put("quantidade", remedio.getQuantidade());
         dados.put("minutos", remedio.getMinuto());
         return dados;
     }
@@ -58,6 +62,9 @@ public class RemedioDAO extends SQLiteOpenHelper {
             Remedio remedio = new Remedio();
             remedio.setId(c.getLong(c.getColumnIndex("id")));
             remedio.setNome(c.getString(c.getColumnIndex("nome")));
+            remedio.setIntervalo(c.getString(c.getColumnIndex("intervalo")));
+            remedio.setPosicao(c.getString(c.getColumnIndex("posicao")));
+            remedio.setQuantidade(c.getString(c.getColumnIndex("quantidade")));
             remedio.setHora(c.getInt(c.getColumnIndex("horas")));
             remedio.setMinuto(c.getInt(c.getColumnIndex("minutos")));
 

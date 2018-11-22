@@ -1,87 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <EditText
-            android:id="@+id/interval"
-            android:layout_width="170dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
-            android:ems="10"
-            android:hint="Intervalo"
-            android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remedio_nome" />
-
-        <EditText
-            android:id="@+id/Position"
-            android:layout_width="170dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="Posição"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/interval"
-            app:layout_constraintTop_toBottomOf="@+id/remedio_nome" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TimePicker
             android:id="@+id/remedio_horario"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:amPmBackgroundColor="#dc0000"
             android:backgroundTint="#dc0000"
             android:headerBackground="#dc0000"
             android:numbersSelectorColor="#dc0000"
-            android:timePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.55"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </TimePicker>
+            android:timePickerMode="spinner" />
 
         <EditText
             android:id="@+id/remedio_nome"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="@string/nome_do_rem_dio"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remedio_horario" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/nome_do_rem_dio" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/remedio_intervalo"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:hint="@string/intervalo" />
+
+            <EditText
+                android:id="@+id/remedio_posicao"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/posi_o" />
+
+        </RelativeLayout>
 
         <EditText
-            android:id="@+id/Amount"
-            android:layout_width="170dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:hint="Quantidade"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/interval" />
+            android:id="@+id/remedio_quantidade"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:hint="@string/quantidade" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

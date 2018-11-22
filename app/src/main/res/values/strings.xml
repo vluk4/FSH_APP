@@ -9,4 +9,7 @@
     <string name="repetir">Repetir:</string>
     <string name="ok">OK</string>
     <string name="sync">sync</string>
+    <string name="intervalo">Intervalo</string>
+    <string name="posi_o">Posição</string>
+    <string name="quantidade">Quantidade</string>
 </resources>

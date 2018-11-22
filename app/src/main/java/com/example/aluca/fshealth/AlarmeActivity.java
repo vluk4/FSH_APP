@@ -50,7 +50,7 @@ public class AlarmeActivity extends AppCompatActivity {
     public void cancelAlarm(){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this,AlarmControl.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,intent, 0);
 
         alarmManager.cancel(pendingIntent);
     }*/

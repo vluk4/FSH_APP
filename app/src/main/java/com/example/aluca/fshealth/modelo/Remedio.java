@@ -8,8 +8,35 @@ public class Remedio implements Serializable {
 
     private Long id;
     private String nome;
+    private String intervalo;
+    private String posicao;
+    private String quantidade;
+
+    public String getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(String posicao) {
+        this.posicao = posicao;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
     private int hora;
     private int minuto;
+
+    public String getIntervalo() {
+        return intervalo;
+    }
+
+    public void setIntervalo(String intervalo) {
+        this.intervalo = intervalo;
+    }
 
     public Long getId() {
         return id;
