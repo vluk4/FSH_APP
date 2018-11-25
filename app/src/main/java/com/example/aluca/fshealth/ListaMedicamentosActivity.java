@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.aluca.fshealth.DAO.RemedioDAO;
+import com.example.aluca.fshealth.modelo.ListadeDispositivos;
 import com.example.aluca.fshealth.modelo.Remedio;
 
 import java.util.List;
@@ -22,14 +23,19 @@ import java.util.List;
 public class ListaMedicamentosActivity extends AppCompatActivity {
 
     private ListView listaMedicamentos;
-    BluetoothAdapter mybluetooth;
+    BluetoothAdapter mybluetooth = null;
     int Bluetoothstatus = 1;
+    int newConection = 2;
+    boolean conection = false;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.sync_button:
                 enableDisableBluetooth(mybluetooth);
+                if(Bluetoothstatus==2){
+                    lista_de_dispositivos();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -75,7 +81,13 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         else if(!mybluetooth.isEnabled()){
             Intent enableBTintent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBTintent,Bluetoothstatus);
+            Bluetoothstatus = 2;
         }
+    }
+
+    public void lista_de_dispositivos(){
+        Intent lista = new Intent(ListaMedicamentosActivity.this,ListadeDispositivos.class);
+        startActivityForResult(lista,newConection);
     }
 
 

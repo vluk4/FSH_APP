@@ -24,6 +24,9 @@
         <activity
             android:name=".AlarmeActivity"
             android:label="Alarme"></activity>
+        <activity android:name=".modelo.ListadeDispositivos"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="Dispositivos bluetooth"></activity>
 
         <receiver android:name=".AlarmControl"
             android:enabled="true"
