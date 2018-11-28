@@ -1,8 +1,10 @@
 package com.example.aluca.fshealth;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -15,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.aluca.fshealth.DAO.RemedioDAO;
-import com.example.aluca.fshealth.modelo.ListadeDispositivos;
 import com.example.aluca.fshealth.modelo.Remedio;
 
 import java.util.List;
@@ -24,16 +25,21 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
 
     private ListView listaMedicamentos;
     BluetoothAdapter mybluetooth = null;
-    int Bluetoothstatus = 1;
-    int newConection = 2;
+    private static final int Bluetoothstatus = 1; // 0 = desligado - >0 = ligado solicita_ativação
+    private static final int newConection = 2; //solicita_Conexão
     boolean conection = false;
+
+    private static String MAC = null;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.sync_button:
-                enableDisableBluetooth(mybluetooth);
-                if(Bluetoothstatus==2){
+                if(conection){
+
+                }
+                else{
+                    enableDisableBluetooth(mybluetooth);
                     lista_de_dispositivos();
                 }
                 break;
@@ -81,12 +87,35 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         else if(!mybluetooth.isEnabled()){
             Intent enableBTintent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBTintent,Bluetoothstatus);
-            Bluetoothstatus = 2;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case Bluetoothstatus:
+                if(resultCode == Activity.RESULT_OK){
+                    Toast.makeText(getApplicationContext(),"O bluetooth foi ativado, clique novamente para syncronizar",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"O bluetooth não foi ativado, tente novamente",Toast.LENGTH_LONG).show();
+                }
+                break;
+
+            case newConection:
+                if(resultCode==Activity.RESULT_OK){
+                    MAC= data.getExtras().getString(ListadeDispositivosActivity.Mac_Adress);
+                    Toast.makeText(getApplicationContext(),"Mac conectado: " + MAC,Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Falha ao conectar, tente novamente",Toast.LENGTH_LONG).show();
+                }
         }
     }
 
     public void lista_de_dispositivos(){
-        Intent lista = new Intent(ListaMedicamentosActivity.this,ListadeDispositivos.class);
+        Intent lista = new Intent(ListaMedicamentosActivity.this,ListadeDispositivosActivity.class);
         startActivityForResult(lista,newConection);
     }
 

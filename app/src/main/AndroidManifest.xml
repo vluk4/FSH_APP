@@ -24,7 +24,7 @@
         <activity
             android:name=".AlarmeActivity"
             android:label="Alarme"></activity>
-        <activity android:name=".modelo.ListadeDispositivos"
+        <activity android:name=".ListadeDispositivosActivity"
             android:theme="@android:style/Theme.Dialog"
             android:label="Dispositivos bluetooth"></activity>
 
