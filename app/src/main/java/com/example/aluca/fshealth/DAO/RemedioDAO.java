@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RemedioDAO extends SQLiteOpenHelper {
     public RemedioDAO(Context context) {
-        super(context, "Remedios", null, 3);
+        super(context, "Remedios", null, 4);
     }
 
     @Override

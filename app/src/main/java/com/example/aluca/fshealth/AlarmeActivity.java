@@ -23,37 +23,36 @@ public class AlarmeActivity extends AppCompatActivity {
 
     private AlarmeHelper helper;
     TimePicker timePicker;
+    private Remedio remedio;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("ESSA PORRA PRINTA ALGO??????????? CARAI");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         helper = new AlarmeHelper(this);
         Intent intent = getIntent();
-        Remedio remedio = (Remedio) intent.getSerializableExtra("remedio");
-        if (remedio != null) {
-            helper.preencheAlarme(remedio);
+        Remedio remedio1 = (Remedio) intent.getSerializableExtra("remedio");
+        if (remedio1 != null) {
+            helper.preencheAlarme(remedio1);
+            System.out.println(remedio1);
         }
     }
 
 
     public void setAlarm(Calendar calendar){
+        String nome = remedio.getNome();
+        Long intervalo = Long.valueOf(remedio.getIntervalo());
+        final int identificador = (int) System.currentTimeMillis();
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(AlarmeActivity.this,AlarmControl.class);
+        intent.putExtra("nome", nome);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, identificador, intent, 0);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0,intent,0);
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR * intervalo, pendingIntent);
     }
-    /*
-    public void cancelAlarm(){
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this,AlarmControl.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,intent, 0);
-
-        alarmManager.cancel(pendingIntent);
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,19 +66,9 @@ public class AlarmeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_alarme_ok:
-                //configurando um evento de alarme
-                timePicker = findViewById(R.id.remedio_horario);
-                Calendar calendar = Calendar.getInstance();
-                if(Build.VERSION.SDK_INT>=23) {
-                    calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), timePicker.getHour(), timePicker.getMinute(), 0);
-                }
-                else{
-                    calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
-                }
-                setAlarm(calendar);
 
-
-                Remedio remedio = helper.pegaRemedio();
+                this.remedio = helper.pegaRemedio();
+                System.out.println("Peguei o remedio: " + this.remedio.getNome());
                 RemedioDAO dao = new RemedioDAO(this);
                 if (remedio.getId() != null) {
                     dao.altera(remedio);
@@ -88,10 +77,16 @@ public class AlarmeActivity extends AppCompatActivity {
                 }
                 dao.close();
 
-                finish();
-                break;
+                //configurando um evento de alarme
+                timePicker = findViewById(R.id.remedio_horario);
+                Calendar calendar = Calendar.getInstance();
+                if (Build.VERSION.SDK_INT >= 23) {
+                    calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), timePicker.getHour(), timePicker.getMinute(), 0);
+                } else {
+                    calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
+                }
+                setAlarm(calendar);
 
-            case R.id.menu_alarme_cancel:
                 finish();
                 break;
         }

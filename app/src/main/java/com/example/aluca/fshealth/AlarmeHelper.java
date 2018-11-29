@@ -7,12 +7,12 @@ import android.widget.TimePicker;
 
 import com.example.aluca.fshealth.modelo.Remedio;
 
- class AlarmeHelper {
+class AlarmeHelper {
 
     private final EditText campoNome;
-     private final EditText campoIntervalo;
-     private final EditText campoPosicao;
-     private final EditText campoQuantidade;
+    private final EditText campoIntervalo;
+    private final EditText campoPosicao;
+    private final EditText campoQuantidade;
     private final TimePicker campoHorario;
     private Remedio remedio;
 
