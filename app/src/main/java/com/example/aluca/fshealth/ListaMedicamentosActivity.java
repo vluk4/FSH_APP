@@ -2,6 +2,8 @@ package com.example.aluca.fshealth;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,24 +21,35 @@ import android.widget.Toast;
 import com.example.aluca.fshealth.DAO.RemedioDAO;
 import com.example.aluca.fshealth.modelo.Remedio;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 public class ListaMedicamentosActivity extends AppCompatActivity {
 
     private ListView listaMedicamentos;
     BluetoothAdapter mybluetooth = null;
+    BluetoothDevice mydDevice=null;
+    BluetoothSocket mySocket = null;
     private static final int Bluetoothstatus = 1; // 0 = desligado - >0 = ligado solicita_ativação
     private static final int newConection = 2; //solicita_Conexão
     boolean conection = false;
 
-    private static String MAC = null;
+    UUID MYUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.sync_button:
                 if(conection){
+                    try{
+                        mySocket.close();
+                        conection=false;
+                        Toast.makeText(getApplicationContext(),"Dispositivo desconectado",Toast.LENGTH_LONG).show();
+                    }catch (IOException erro){
+                        Toast.makeText(getApplicationContext(),"Erro: " + erro,Toast.LENGTH_LONG).show();
 
+                    }
                 }
                 else{
                     enableDisableBluetooth(mybluetooth);
@@ -98,19 +111,32 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                 if(resultCode == Activity.RESULT_OK){
                     Toast.makeText(getApplicationContext(),"O bluetooth foi ativado, clique novamente para syncronizar",Toast.LENGTH_LONG).show();
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"O bluetooth não foi ativado, tente novamente",Toast.LENGTH_LONG).show();
-                }
+                else
+                    Toast.makeText(getApplicationContext(), "O bluetooth não foi ativado, tente novamente", Toast.LENGTH_LONG).show();
                 break;
 
             case newConection:
                 if(resultCode==Activity.RESULT_OK){
-                    MAC= data.getExtras().getString(ListadeDispositivosActivity.Mac_Adress);
-                    Toast.makeText(getApplicationContext(),"Mac conectado: " + MAC,Toast.LENGTH_LONG).show();
+                    String MAC = data.getExtras().getString(ListadeDispositivosActivity.Mac_Adress);
+
+                    mydDevice = mybluetooth.getRemoteDevice(MAC);
+
+                    //tentando efetuar uma conexão
+                    try {
+                        mySocket = mydDevice.createRfcommSocketToServiceRecord(MYUUID);
+                        mybluetooth.cancelDiscovery(); // cancelando qualquer tipo de busca para evitar erros
+                        mySocket.connect();
+                        conection = true;
+                        Toast.makeText(getApplicationContext(),"Você foi conectado com: " + MAC,Toast.LENGTH_LONG).show();
+                    }catch (IOException erro){
+                        conection=false;
+                        Toast.makeText(getApplicationContext(),"erro: " + erro,Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Falha ao conectar, tente novamente",Toast.LENGTH_LONG).show();
                 }
+                break;
         }
     }
 
