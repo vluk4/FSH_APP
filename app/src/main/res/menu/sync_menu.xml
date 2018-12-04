@@ -2,6 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/bluetooth_button"
+        android:icon="@android:drawable/stat_sys_data_bluetooth"
+        android:title="@string/sync"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/sync_button"
         android:icon="@android:drawable/ic_popup_sync"
         android:title="@string/sync"

@@ -34,13 +34,16 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
     private static final int Bluetoothstatus = 1; // 0 = desligado - >0 = ligado solicita_ativação
     private static final int newConection = 2; //solicita_Conexão
     boolean conection = false;
+    boolean aux=false;
+    long teste = 1000;
 
+    ConnectedThread connectedThread;
     UUID MYUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.sync_button:
+            case R.id.bluetooth_button:
                 if(conection){
                     try{
                         mySocket.close();
@@ -51,15 +54,39 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
 
                     }
                 }
-                else{
+                else if(!conection){
                     enableDisableBluetooth(mybluetooth);
-                    lista_de_dispositivos();
+                    if(BluetoothAdapter.STATE_CONNECTED >0){
+                        lista_de_dispositivos();
+                    }
                 }
                 break;
+            case R.id.sync_button:
+                if(conection){
+                    String horario = "R1200";
+                    String posicao = "00700";
+
+                    connectedThread.write(horario);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    connectedThread.write(posicao);
+
+                    Toast.makeText(getApplicationContext(),"Dados enviados",Toast.LENGTH_LONG).show();
+
+                }
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void enviaDados(Remedio intervalo, Remedio posicao){
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +119,8 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         registerForContextMenu(listaMedicamentos);
     }
 
+
+
     public void enableDisableBluetooth(BluetoothAdapter mybluetooth){
 
         if(mybluetooth==null){
@@ -100,6 +129,7 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
         else if(!mybluetooth.isEnabled()){
             Intent enableBTintent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBTintent,Bluetoothstatus);
+            aux=true;
         }
     }
 
@@ -125,6 +155,8 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                     try {
                         mySocket = mydDevice.createRfcommSocketToServiceRecord(MYUUID);
                         mybluetooth.cancelDiscovery(); // cancelando qualquer tipo de busca para evitar erros
+                        connectedThread = new ConnectedThread(mySocket);
+                        connectedThread.start();
                         mySocket.connect();
                         conection = true;
                         Toast.makeText(getApplicationContext(),"Você foi conectado com: " + MAC,Toast.LENGTH_LONG).show();
