@@ -22,6 +22,8 @@ import com.example.aluca.fshealth.DAO.RemedioDAO;
 import com.example.aluca.fshealth.modelo.Remedio;
 
 import java.io.IOException;
+import java.time.Clock;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,7 +37,6 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
     private static final int newConection = 2; //solicita_Conexão
     boolean conection = false;
     boolean aux=false;
-    long teste = 1000;
 
     ConnectedThread connectedThread;
     UUID MYUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
@@ -63,18 +64,24 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                 break;
             case R.id.sync_button:
                 if(conection){
-                    String horario = "R1200";
-                    String posicao = "00700";
-
-                    connectedThread.write(horario);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    Calendar calendar;
+                    //String horario = parseint(calendar.getTime());
+                    String posicao ;
+                    RemedioDAO dao = new RemedioDAO(this);
+                    List<Remedio> remedios = dao.buscaRemedios();
+                    for( int i= 0;i<4;i++){
+                        if(!(remedios.get(i)!=null)){
+                            posicao = i+"0"+remedios.get(i).getIntervalo()+"0";
+                            connectedThread.write(posicao);
+                        }
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    connectedThread.write(posicao);
-
-                    Toast.makeText(getApplicationContext(),"Dados enviados",Toast.LENGTH_LONG).show();
+                    dao.close();
+                    Toast.makeText(getApplicationContext(),"Dados enviados" ,Toast.LENGTH_LONG).show();
 
                 }
                 break;
@@ -84,8 +91,10 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
     }
 
 
-    public void enviaDados(Remedio intervalo, Remedio posicao){
-
+    public void enviaDados(){
+        Remedio remedio = new Remedio();
+        String hora = remedio.getNome();
+        System.out.println(hora);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
