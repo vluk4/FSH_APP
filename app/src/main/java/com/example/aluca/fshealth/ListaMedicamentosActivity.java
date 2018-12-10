@@ -22,13 +22,12 @@ import com.example.aluca.fshealth.DAO.RemedioDAO;
 import com.example.aluca.fshealth.modelo.Remedio;
 
 import java.io.IOException;
-import java.time.Clock;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
 public class ListaMedicamentosActivity extends AppCompatActivity {
 
+    List<Remedio> remedios;
     private ListView listaMedicamentos;
     BluetoothAdapter mybluetooth = null;
     BluetoothDevice mydDevice=null;
@@ -37,6 +36,7 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
     private static final int newConection = 2; //solicita_Conexão
     boolean conection = false;
     boolean aux=false;
+    long teste = 1000;
 
     ConnectedThread connectedThread;
     UUID MYUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
@@ -64,23 +64,53 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                 break;
             case R.id.sync_button:
                 if(conection){
-                    Calendar calendar;
-                    //String horario = parseint(calendar.getTime());
+                    String horario = "R1200";
                     String posicao ;
-                    RemedioDAO dao = new RemedioDAO(this);
-                    List<Remedio> remedios = dao.buscaRemedios();
-                    for( int i= 0;i<4;i++){
-                        if(!(remedios.get(i)!=null)){
-                            posicao = i+"0"+remedios.get(i).getIntervalo()+"0";
-                            connectedThread.write(posicao);
-                        }
+                    connectedThread.write(horario);
+
+                    if(remedios.get(0).getIntervalo()!=null){
+                        testaIntervalo(0);
+                        posicao = "0" + remedios.get(0).getIntervalo() + "0";
+                        connectedThread.write(posicao);
                         try {
-                            Thread.sleep(100);
+                            Thread.sleep(200);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+
                     }
-                    dao.close();
+                    if(remedios.get(1).getIntervalo()!=null){
+                        testaIntervalo(1);
+                        posicao = "0" + remedios.get(1).getIntervalo() + "0";
+                        connectedThread.write(posicao);
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }if(remedios.get(2).getIntervalo()!=null){
+                        testaIntervalo(2);
+                        posicao = "0" + remedios.get(2).getIntervalo() + "0";
+                        connectedThread.write(posicao);
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }if(remedios.get(3).getIntervalo()!=null){
+                        testaIntervalo(3);
+                        posicao = "0" + remedios.get(3).getIntervalo() + "0";
+                        connectedThread.write(posicao);
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
                     Toast.makeText(getApplicationContext(),"Dados enviados" ,Toast.LENGTH_LONG).show();
 
                 }
@@ -91,10 +121,10 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
     }
 
 
-    public void enviaDados(){
-        Remedio remedio = new Remedio();
-        String hora = remedio.getNome();
-        System.out.println(hora);
+    public void testaIntervalo( int i){
+        if(Integer.parseInt(remedios.get(i).getIntervalo())<10){
+            remedios.get(i).setIntervalo("0"+remedios.get(i).getIntervalo());
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,7 +254,7 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
 
     private void carregaLista() {
         RemedioDAO dao = new RemedioDAO(this);
-        List<Remedio> remedios = dao.buscaRemedios();
+        remedios = dao.buscaRemedios();
         dao.close();
 
         ArrayAdapter<Remedio> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, remedios);
