@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import static java.lang.Thread.sleep;
+
 public class ListaMedicamentosActivity extends AppCompatActivity {
 
     List<Remedio> remedios;
@@ -67,51 +69,66 @@ public class ListaMedicamentosActivity extends AppCompatActivity {
                     String horario = "R1200";
                     String posicao ;
                     connectedThread.write(horario);
+                    try {
+                        sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                     if(remedios.get(0).getIntervalo()!=null){
                         testaIntervalo(0);
-                        posicao = "0" + remedios.get(0).getIntervalo() + "0";
+                        posicao = "0" + remedios.get(0).getIntervalo() + "00";
                         connectedThread.write(posicao);
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(),"Dados enviados " + posicao ,Toast.LENGTH_SHORT).show();
 
                     }
+                    try {
+                        sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     if(remedios.get(1).getIntervalo()!=null){
                         testaIntervalo(1);
-                        posicao = "0" + remedios.get(1).getIntervalo() + "0";
+                        posicao = "1" + remedios.get(1).getIntervalo() + "00";
                         connectedThread.write(posicao);
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(),"Dados enviados " + posicao ,Toast.LENGTH_SHORT).show();
 
+
+
+                    }
+                    try {
+                        sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }if(remedios.get(2).getIntervalo()!=null){
                         testaIntervalo(2);
-                        posicao = "0" + remedios.get(2).getIntervalo() + "0";
+                        posicao = "2" + remedios.get(2).getIntervalo() + "00";
                         connectedThread.write(posicao);
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(),"Dados enviados " + posicao ,Toast.LENGTH_SHORT).show();
 
+
+                    }
+                    try {
+                        sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }if(remedios.get(3).getIntervalo()!=null){
                         testaIntervalo(3);
-                        posicao = "0" + remedios.get(3).getIntervalo() + "0";
+                        posicao = "3" + remedios.get(3).getIntervalo() + "00";
                         connectedThread.write(posicao);
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(),"Dados enviados " + posicao ,Toast.LENGTH_SHORT).show();
+
 
                     }
 
-                    Toast.makeText(getApplicationContext(),"Dados enviados" ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Dados enviados " ,Toast.LENGTH_LONG).show();
 
                 }
                 break;
