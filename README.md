@@ -1,2 +1,2 @@
 # FSH_APP
-Aplicação integrada Dispensador de Medicamentos Automático, produto desenvolvido como projeto da cadeira de Microcontroladores e Microprocessadores
+Aplicação integrada Dispensador de Medicamentos Automático, aplicativo desenvolvido como projeto da cadeira de Banco de Dados
